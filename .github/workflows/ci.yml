@@ -1,12 +1,25 @@
+
 name: CI
 
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout the code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build Docker image
+      run: docker build -t my-python-app .
+
+    - name: Run Tests inside Docker
+      run: docker run my-python-app
+    
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
@@ -20,15 +33,21 @@ jobs:
       
     - name: Lint with flake8
       run: |
-        flake8 app tests
-      continue-on-error: true  # Permite que falhas no linting não bloqueiem a CI
+        flake8 src tests
+      continue-on-error: true
 
     - name: Format with black
       run: |
-        black --check app tests
-      continue-on-error: true  # Permite que falhas no formatador não bloqueiem a CI
+        black --check src tests
+      continue-on-error: true
 
-    - name: Test with pytest
-      run: |
-        pytest
-      continue-on-error: true  # Permite que falhas nos testes não bloqueiem a CI
+
+
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
