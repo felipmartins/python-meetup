@@ -26,15 +26,15 @@ mock_data = {
     ]
 }
 
-@patch("src.routers.product.read_data", return_value=mock_data)
+@patch("src.routes.product.read_data", return_value=mock_data)
 def test_list_products(mock_read_data):
     response = client.get("/businesses/1/products")
     assert response.status_code == 200
     assert len(response.json()) == 2
     assert response.json()[0]["name"] == "Laptop"
 
-@patch("src.routers.product.read_data", return_value=mock_data)
-@patch("src.routers.product.write_data")
+@patch("src.routes.product.read_data", return_value=mock_data)
+@patch("src.routes.product.write_data")
 def test_add_product(mock_write_data, mock_read_data):
     new_product = {
         "id": 3,
@@ -51,8 +51,8 @@ def test_add_product(mock_write_data, mock_read_data):
     updated_data["businesses"][0]["products"].append(new_product)
     mock_write_data.assert_called_with(updated_data)
 
-@patch("src.routers.product.read_data", return_value=mock_data)
-@patch("src.routers.product.write_data")
+@patch("src.routes.product.read_data", return_value=mock_data)
+@patch("src.routes.product.write_data")
 def test_update_product(mock_write_data, mock_read_data):
     updated_product = {
         "id": 1,
@@ -69,8 +69,8 @@ def test_update_product(mock_write_data, mock_read_data):
     updated_data["businesses"][0]["products"][0].update(updated_product)
     mock_write_data.assert_called_with(updated_data)
 
-@patch("src.routers.product.read_data", return_value=mock_data)
-@patch("src.routers.product.write_data")
+@patch("src.routes.product.read_data", return_value=mock_data)
+@patch("src.routes.product.write_data")
 def test_delete_product(mock_write_data, mock_read_data):
     response = client.delete("/businesses/1/products/1")
     assert response.status_code == 200
@@ -83,13 +83,13 @@ def test_delete_product(mock_write_data, mock_read_data):
     ]
     mock_write_data.assert_called_with(updated_data)
 
-@patch("src.routers.product.read_data", return_value=mock_data)
+@patch("src.routes.product.read_data", return_value=mock_data)
 def test_list_products_for_non_existent_business(mock_read_data):
     response = client.get("/businesses/999/products")
     assert response.status_code == 404
     assert response.json() == {"detail": "Business not found"}
 
-@patch("src.routers.product.read_data", return_value=mock_data)
+@patch("src.routes.product.read_data", return_value=mock_data)
 def test_delete_non_existent_product(mock_read_data):
     response = client.delete("/businesses/1/products/999")
     assert response.status_code == 404
