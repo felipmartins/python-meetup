@@ -97,7 +97,9 @@ def test_delete_business(mock_write_data, mock_read_data):
 
     mock_write_data.assert_called_once()
     updated_data = mock_read_data.return_value
-    updated_data["businesses"] = [b for b in updated_data["businesses"] if b["id"] != 1]
+    updated_data["businesses"] = [
+        b for b in updated_data["businesses"] if b["id"] != 1
+        ]
     mock_write_data.assert_called_with(updated_data)
 
 

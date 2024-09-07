@@ -53,7 +53,11 @@ def test_add_employee(mock_write_data, mock_read_data):
 @patch("src.routes.employee.read_data", return_value=mock_data)
 @patch("src.routes.employee.write_data")
 def test_update_employee(mock_write_data, mock_read_data):
-    updated_employee = {"id": 1, "name": "John Doe Updated", "role": "Senior Manager"}
+    updated_employee = {
+        "id": 1,
+        "name": "John Doe Updated",
+        "role": "Senior Manager",
+    }
 
     response = client.put("/businesses/1/employees/1", json=updated_employee)
     assert response.status_code == 200
