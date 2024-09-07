@@ -40,14 +40,3 @@ jobs:
       run: |
         black --check src tests
       continue-on-error: true
-
-
-
-
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    
