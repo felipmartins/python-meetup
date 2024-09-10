@@ -11,6 +11,10 @@ app.include_router(employee_router, tags=["employee"])
 app.include_router(product_router, tags=["product"])
 
 
+@app.get("/")
+def home():
+    return {"Python": "Meetup 2024"}
+
 
 @app.get("/health")
 def health():
