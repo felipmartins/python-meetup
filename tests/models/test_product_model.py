@@ -31,10 +31,7 @@ def test_create_product_with_invalid_price():
 
 
 def test_create_product_with_zero_price():
-    product = Product(id=2, 
-                      name="Free Item", 
-                      price=0.0, 
-                      is_available=True)
+    product = Product(id=2, name="Free Item", price=0.0, is_available=True)
     assert product.id == 2
     assert product.name == "Free Item"
     assert product.price == 0.0
@@ -42,7 +39,4 @@ def test_create_product_with_zero_price():
 
 def test_create_product_with_negative_price():
     with pytest.raises(ValidationError):
-        Product(id=3, 
-                name="Negative Price Item", 
-                price=-100.0, 
-                is_available=True)
+        Product(id=3, name="Negative Price Item", price=-100.0, is_available=True)

@@ -95,14 +95,8 @@ def test_create_business_with_missing_fields():
 def test_create_business_with_multiple_employees_and_products():
     employee1 = Employee(id=1, name="John Doe", role="Manager")
     employee2 = Employee(id=2, name="Jane Smith", role="Developer")
-    product1 = Product(id=101, 
-                       name="Laptop", 
-                       price=999.99, 
-                       is_available=True)
-    product2 = Product(id=102, 
-                       name="Smartphone", 
-                       price=499.99, 
-                       is_available=True)
+    product1 = Product(id=101, name="Laptop", price=999.99, is_available=True)
+    product2 = Product(id=102, name="Smartphone", price=499.99, is_available=True)
 
     business = Business(
         id=1,

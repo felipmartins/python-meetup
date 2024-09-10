@@ -12,14 +12,8 @@ mock_data = {
             "address": "123 Tech Street",
             "employees": [],
             "products": [
-                {"id": 1, 
-                 "name": "Laptop", 
-                 "price": 999.99, 
-                 "is_available": True},
-                {"id": 2, 
-                 "name": "Smartphone", 
-                 "price": 499.99, 
-                 "is_available": False},
+                {"id": 1, "name": "Laptop", "price": 999.99, "is_available": True},
+                {"id": 2, "name": "Smartphone", "price": 499.99, "is_available": False},
             ],
         },
         {
@@ -44,10 +38,7 @@ def test_list_products(mock_read_data):
 @patch("src.routes.product.read_data", return_value=mock_data)
 @patch("src.routes.product.write_data")
 def test_add_product(mock_write_data, mock_read_data):
-    new_product = {"id": 3,
-                   "name": "Tablet", 
-                   "price": 299.99, 
-                   "is_available": True}
+    new_product = {"id": 3, "name": "Tablet", "price": 299.99, "is_available": True}
 
     response = client.post("/businesses/1/products", json=new_product)
     assert response.status_code == 200
@@ -62,11 +53,12 @@ def test_add_product(mock_write_data, mock_read_data):
 @patch("src.routes.product.read_data", return_value=mock_data)
 @patch("src.routes.product.write_data")
 def test_update_product(mock_write_data, mock_read_data):
-    updated_product = {"id": 1, 
-                       "name": "Updated Laptop", 
-                       "price": 1099.99, 
-                       "is_available": True,
-                       }
+    updated_product = {
+        "id": 1,
+        "name": "Updated Laptop",
+        "price": 1099.99,
+        "is_available": True,
+    }
 
     response = client.put("/businesses/1/products/1", json=updated_product)
     assert response.status_code == 200
