@@ -9,7 +9,7 @@ client = TestClient(app)
 def test_home_route():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"message": "Python Meetup 2023"}
+    assert response.json() == {"message": "Python Meetup 2024!!"}
 
 
 def test_health_route():
